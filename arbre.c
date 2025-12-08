@@ -1,78 +1,78 @@
 
 typedef struct Arbre {
     Element elmt;
-    struct Arbre* fg;    // fils gauche
-    struct Arbre* fd;    // fils droit
+    struct Arbre* fg;    
+    struct Arbre* fd;    
 } Arbre;
 
 
 
 Arbre* creerArbre(Element r) {
-    Arbre* noeud = malloc(sizeof(Arbre));   // réserver mémoire
+    Arbre* noeud = malloc(sizeof(Arbre));   
 
     if (noeud == NULL) {
-        return NULL;    // sécurité si allocation échoue
+        return NULL;    
     }
 
-    noeud->elmt = r;     // affecter la valeur
-    noeud->fg = NULL;    // pas de fils gauche
-    noeud->fd = NULL;    // pas de fils droit
+    noeud->elmt = r;     
+    noeud->fg = NULL;    
+    noeud->fd = NULL;    
 
     return noeud;
 }
 
 Arbre* creerArbre(Element r) {
-    Arbre* noeud = malloc(sizeof(Arbre));   // réserver la mémoire
+    Arbre* noeud = malloc(sizeof(Arbre));  
 
     if (noeud == NULL) {
-        return NULL;    // en cas d'échec d’allocation
+        return NULL;    
     }
 
-    noeud->elmt = r;     // elmt(noeud) ← r
-    noeud->fg = NULL;    // fg(noeud) ← NULL
-    noeud->fd = NULL;    // fd(noeud) ← NULL
+    noeud->elmt = r;     
+    noeud->fg = NULL;    
+    noeud->fd = NULL;    
 
-    return noeud;        // retourner noeud
+    return noeud;       
 }
 
 
 bool estFeuille(Arbre* a) {
     if (a == NULL) {
-        // ERREUR() — ici on peut afficher un message ou gérer autrement
+       
         fprintf(stderr, "Erreur : pointeur NULL dans estFeuille.\n");
         return false; 
     }
 
     if (a->fg == NULL && a->fd == NULL) {
-        return true;    // c’est une feuille
+        return true;    
     } else {
-        return false;   // pas une feuille
+        return false;  
     }
 }
 
 int existeFilsDroit(Arbre* a) {
     if (a == NULL) {
         fprintf(stderr, "Erreur : pointeur NULL dans existeFilsDroit.\n");
-        return 0;   // FAUX
+        return 0;   
     }
 
     if (a->fd == NULL) {
-        return 0;   // pas de fils droit
+        return 0;   
     } else {
-        return 1;   // fils droit existant
+        return 1;   
     }
 }
 
 int existeFilsGauche(Arbre* a) {
     if (a == NULL) {
         fprintf(stderr, "Erreur : pointeur NULL dans existeFilsGauche.\n");
-        return 0;   // FAUX
+        return 0;   
     }
 
     if (a->fg == NULL) {
-        return 0;   // pas de fils gauche
+        return 0;   
     } else {
-        return 1;   // fils gauche existant
+        return 1;   
     }
 }
 Arbre* filsDroit(Arbre* a) {
@@ -107,31 +107,31 @@ Arbre* modifierElement(Arbre* a, Element r) {
         return NULL;
     }
 
-    a->elmt = r;   // elmt(a) ← r
-    return a;      // retourne le pointeur (comme dans ton pseudo-code)
+    a->elmt = r;  
+    return a;      
 }
 int ajouterFilsGauche(Arbre* a, Element r) {
     if (a == NULL) {
-        return 0;   // FAUX
+        return 0;   
     }
 
     if (!existeFilsGauche(a)) {
         a->fg = creerArbre(r);
-        return 1;   // VRAI
+        return 1; 
     } else {
-        return 0;   // FAUX
+        return 0;   
     }
 }
 int ajouterFilsDroit(Arbre* a, Element r) {
     if (a == NULL) {
-        return 0;   // FAUX
+        return 0;   
     }
 
     if (!existeFilsDroit(a)) {
         a->fd = creerArbre(r);
-        return 1;   // VRAI
+        return 1;   
     } else {
-        return 0;   // FAUX
+        return 0;   
     }
 }
 void supprimerFilsDroit(Arbre* a) {
@@ -143,7 +143,7 @@ void supprimerFilsDroit(Arbre* a) {
     if (existeFilsDroit(a)) {
         Arbre* droit = a->fd;
 
-        // supprimer récursivement les sous-arbres
+    
         if (existeFilsGauche(droit)) {
             supprimerFilsGauche(droit);
         }
@@ -151,7 +151,7 @@ void supprimerFilsDroit(Arbre* a) {
             supprimerFilsDroit(droit);
         }
 
-        // libérer le noeud fils droit
+       
         free(a->fd);
         a->fd = NULL;
     }
@@ -165,7 +165,7 @@ void supprimerFilsGauche(Arbre* a) {
     if (existeFilsGauche(a)) {
         Arbre* gauche = a->fg;
 
-        // supprimer récursivement les sous-arbres
+      
         if (existeFilsGauche(gauche)) {
             supprimerFilsGauche(gauche);
         }
@@ -173,7 +173,7 @@ void supprimerFilsGauche(Arbre* a) {
             supprimerFilsDroit(gauche);
         }
 
-        // libérer le noeud fils gauche
+       
         free(a->fg);
         a->fg = NULL;
     }
@@ -181,16 +181,16 @@ void supprimerFilsGauche(Arbre* a) {
 
 void parcoursPrefixe(Arbre* a) {
     if (a != NULL) {
-        traiter(a->elmt);      // traiter(elmt(a))
-        parcoursPrefixe(a->fg); // parcours du sous-arbre gauche
-        parcoursPrefixe(a->fd); // parcours du sous-arbre droit
+        traiter(a->elmt);     
+        parcoursPrefixe(a->fg); 
+        parcoursPrefixe(a->fd); 
     }
 }
 
 void parcoursInfixe(Arbre* a) {
     if (a != NULL) {
-        parcoursInfixe(a->fg);   // parcours du sous-arbre gauche
-        traiter(a->elmt);        // traiter(elmt(a))
-        parcoursInfixe(a->fd);   // parcours du sous-arbre droit
+        parcoursInfixe(a->fg);  
+        traiter(a->elmt);        
+        parcoursInfixe(a->fd);   
     }
 }
