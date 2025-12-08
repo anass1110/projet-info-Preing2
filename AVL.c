@@ -50,7 +50,7 @@ typedef struct Avl {
 
 
 Avl* creerNoeud(Element e) {
-    Avl* n = (Avl*)malloc(sizeof(Avl));
+    Avl* n = malloc(sizeof(Avl));
     if(n == NULL) {
         fprintf(stderr, "Erreur d'allocation mémoire\n");
         exit(1);
