@@ -31,12 +31,12 @@ int min2(int a,int b,int c){
     return min1(d,c);
 }
 
-// Structure d'un noeud AVL
+
 typedef struct Arbre {
-    int elmt;            // contenu du nœud
-    struct Arbre *fg;        // fils gauche
-    struct Arbre *fd;        // fils droit
-    int equilibre;           // facteur d’équilibre 
+    int elmt;           
+    struct Arbre *fg;      
+    struct Arbre *fd;       
+    int equilibre;          
 } Arbre;
 
 
@@ -50,7 +50,7 @@ Arbre* creerNoeud(Element e) {
     n->elmt = e;
     n->fg = NULL;
     n->fd = NULL;
-    n->equilibre = 0;   // au début, un nouveau nœud est équilibré
+    n->equilibre = 0;  
 
     return n;}
 
@@ -62,7 +62,7 @@ Arbre* rotationGauche(Arbre* a) {
     int eq_a = a->equilibre;
     int eq_p = pivot->equilibre;
 
-    // Rotation
+    
     a->fd = pivot->fg;
     pivot->fg = a;
     a->equilibre=eq_a - max1(eq_p, 0) - 1;
@@ -78,7 +78,7 @@ Arbre* rotationDroite(Arbre* a) {
     int eq_a = a->equilibre;
     int eq_p = pivot->equilibre;
 
-    // Rotation
+  
     a->fg = pivot->fd;
     pivot->fd = a;
     a->equilibre=eq_a - min1(eq_p, 0) + 1;
@@ -91,10 +91,10 @@ Arbre* rotationDroite(Arbre* a) {
 
 Arbre* doubleRotationGauche(Arbre* a) {
 
-    // Étape 1 : rotation droite sur le fils droit
+
     a->fd = rotationDroite(a->fd);
 
-    // Étape 2 : rotation gauche sur a
+  
     return rotationGauche(a);
 }
 
@@ -102,10 +102,10 @@ Arbre* doubleRotationGauche(Arbre* a) {
 
 Arbre* doubleRotationDroite(Arbre* a) {
 
-    // Étape 1 : rotation gauche sur le fils gauche
+    
     a->fg = rotationGauche(a->fg);
 
-    // Étape 2 : rotation droite sur a
+   
     return rotationDroite(a);
 }
 
@@ -113,7 +113,7 @@ Arbre* doubleRotationDroite(Arbre* a) {
 
 Arbre* equilibrerAVL(Arbre* a) {
 
-    // Sous-arbre droit trop profond
+  
     if (a->equilibre >= 2) {
         if (a->fd != NULL && a->fd->equilibre >= 0)
             return rotationGauche(a);
@@ -121,7 +121,7 @@ Arbre* equilibrerAVL(Arbre* a) {
             return doubleRotationGauche(a);
     }
 
-    // Sous-arbre gauche trop profond
+   
     else if (a->equilibre <= -2) {
         if (a->fg != NULL && a->fg->equilibre <= 0)
             return rotationDroite(a);
@@ -129,7 +129,7 @@ Arbre* equilibrerAVL(Arbre* a) {
             return doubleRotationDroite(a);
     }
 
-    // Sinon, aucun déséquilibre
+   
     return a;
 
 
@@ -139,33 +139,33 @@ Arbre* equilibrerAVL(Arbre* a) {
 
 Arbre* insertionAVL(Arbre* a, int e, int* h) {
     if (a == NULL) {
-        *h = 1;               // on ajoute un élément → l’équilibre change
+        *h = 1;              
         return creerArbre(e);
     }
 
-    if (e < a->elmt) {        // insertion à gauche
+    if (e < a->elmt) {      
         a->fg = insertionAVL(a->fg, e, h);
-        *h = -(*h);           // différence de -1 si on insère à gauche
+        *h = -(*h);          
     }
-    else if (e > a->elmt) {   // insertion à droite
+    else if (e > a->elmt) {   
         a->fd = insertionAVL(a->fd, e, h);
-        // *h reste positif (rien à faire)
+        
     }
     else {
-        // e == a->elmt → élément déjà présent
-        *h = 0;               // pas de changement d’équilibre
-        return a;             // aucune modification
+       
+        *h = 0;               
+        return a;             
     }
 
-    // Si la hauteur a changé, mettre à jour l’équilibre
+
     if (*h != 0) {
-        a->equilibre = a->equilibre + *h;  // maj du facteur d’équilibre
+        a->equilibre = a->equilibre + *h;  
       a = equilibrageAVL(a);
 
         if (a->equilibre == 0) {
-            *h = 0;            // l'arbre redevient équilibré
+            *h = 0;           
         } else {
-            *h = 1;            // la hauteur de ce nœud a changé
+            *h = 1;           
         }
     }
 
@@ -178,25 +178,25 @@ Arbre suppMinAVL(Arbre a, int *h, Element *pe) {
     Arbre tmp;
 
     if (a->fg == NULL) {  
-        // On a trouvé la plus petite valeur
+       
         *pe = a->elem;    
         *h = -1;
 
         tmp = a;
-        a = a->fd;      // Le remplaçant est le fils droit
-        free(tmp);      // Libération du nœud supprimé
+        a = a->fd;      
+        free(tmp);      
 
         return a;
     } 
     else {
-        // Recherche récursive du minimum dans fg
+        
         a->fg = suppMinAVL(a->fg, h, pe);
         *h = -(*h);
     }
 
-    // Si le sous-arbre a changé de hauteur...
+   
     if (*h != 0) {
-        a->equilibre += *h;  // mise à jour du facteur d’équilibre
+        a->equilibre += *h;  
 
         if (a->equilibre == 0)
             *h = -1;
@@ -229,13 +229,13 @@ Arbre suppressionAVL(Arbre a, Element e, int *h) {
         *h = -(*h);
     }
     else {  
-        // e == a->elem → élément trouvé
+       
         if (existeFilsDroit(a)) {
-            // Remplacer par le minimum du sous-arbre droit
+           
             a->fd = suppMinAVL(a->fd, h, &a->elem);
         }
         else {
-            // Pas de fils droit → remonter le fils gauche
+   
             tmp = a;
             a = a->fg;
             free(tmp);
@@ -244,7 +244,7 @@ Arbre suppressionAVL(Arbre a, Element e, int *h) {
         }
     }
 
-    // Mise à jour des hauteurs et équilibrage local
+  
     if (*h != 0) {
         a->equilibre += *h;
 
