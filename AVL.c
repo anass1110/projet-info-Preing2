@@ -7,7 +7,7 @@ typedef struct usine{
     int vol_max;
     int vol_source;
     int vol_reel;
-}
+}Usine;
 
 
 int max2(int a,int b,int c){
