@@ -41,16 +41,16 @@ int min2(int a,int b,int c){
 }
 
 
-typedef struct Arbre {
+typedef struct Avl {
     int elmt;           
-    struct Arbre *fg;      
-    struct Arbre *fd;       
+    struct Avl *fg;      
+    struct Avl *fd;       
     int equilibre;          
-} Arbre;
+} Avl;
 
 
-Arbre* creerNoeud(Element e) {
-    Arbre* n = (Arbre*)malloc(sizeof(Arbre));
+Avl* creerNoeud(Element e) {
+    Avl* n = (Avl*)malloc(sizeof(Avl));
     if(n == NULL) {
         fprintf(stderr, "Erreur d'allocation mémoire\n");
         exit(1);
@@ -64,9 +64,9 @@ Arbre* creerNoeud(Element e) {
     return n;}
 
 
-Arbre* rotationGauche(Arbre* a) {
+Avl* rotationGauche(Avl* a) {
 
-    Arbre* pivot = a->fd;
+    Avl* pivot = a->fd;
 
     int eq_a = a->equilibre;
     int eq_p = pivot->equilibre;
@@ -81,9 +81,9 @@ Arbre* rotationGauche(Arbre* a) {
 
 
 
-Arbre* rotationDroite(Arbre* a) {
+Avl* rotationDroite(Avl* a) {
 
-    Arbre* pivot = a->fg;
+    Avl* pivot = a->fg;
     int eq_a = a->equilibre;
     int eq_p = pivot->equilibre;
 
@@ -98,7 +98,7 @@ Arbre* rotationDroite(Arbre* a) {
 
 
 
-Arbre* doubleRotationGauche(Arbre* a) {
+Avl* doubleRotationGauche(Avl* a) {
 
 
     a->fd = rotationDroite(a->fd);
@@ -109,7 +109,7 @@ Arbre* doubleRotationGauche(Arbre* a) {
 
 
 
-Arbre* doubleRotationDroite(Arbre* a) {
+Avl* doubleRotationDroite(Avl* a) {
 
     
     a->fg = rotationGauche(a->fg);
@@ -120,7 +120,7 @@ Arbre* doubleRotationDroite(Arbre* a) {
 
 
 
-Arbre* equilibrerAVL(Arbre* a) {
+Avl* equilibrerAVL(Avl* a) {
 
   
     if (a->equilibre >= 2) {
@@ -146,7 +146,7 @@ Arbre* equilibrerAVL(Arbre* a) {
 
 
 
-Arbre* insertionAVL(Arbre* a, int e, int* h) {
+Avl* insertionAVL(Avl* a, int e, int* h) {
     if (a == NULL) {
         *h = 1;              
         return creerArbre(e);
@@ -183,8 +183,8 @@ Arbre* insertionAVL(Arbre* a, int e, int* h) {
 
 
 
-Arbre suppMinAVL(Arbre a, int *h, Element *pe) {
-    Arbre tmp;
+Avl suppMinAVL(Avl a, int *h, Element *pe) {
+    Avl tmp;
 
     if (a->fg == NULL) {  
        
@@ -218,12 +218,12 @@ Arbre suppMinAVL(Arbre a, int *h, Element *pe) {
 
 
 
-int existeFilsDroit(Arbre a) {
+int existeFilsDroit(Avl a) {
     return (a->fd != NULL);
 }
 
-Arbre suppressionAVL(Arbre a, Element e, int *h) {
-    Arbre tmp;
+Avl suppressionAVL(Avl a, Element e, int *h) {
+    Avl tmp;
 
     if (a == NULL) {
         *h = 0;
