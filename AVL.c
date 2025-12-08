@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+typedef struct usine{
+    char* id;
+    int vol_max;
+    int vol_source;
+    int vol_reel;
+}
+
+
 int max2(int a,int b,int c){
     int d;
     d=max1(a,b);
