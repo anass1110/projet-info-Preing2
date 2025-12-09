@@ -12,12 +12,21 @@ erreur() {
 }
 
 
+if [ $# -lt 3 ]; then
+    erreur "Commande incomplète."
+fi
 
+if [ $# -gt 3 ]; then
+    erreur "Trop d'arguments."
+fi
 
+chemin="$1"
+mode="$2"
+option="$3"
 
-
-
-
+if [ ! -f "$chemin" ]; then
+  erreur "Fichier d'entrée '$chemin' introuvable."
+fi
 
 
 
