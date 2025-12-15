@@ -60,7 +60,7 @@ case "$option" in
     exit 0
 fi
 
-if [ "$MODE" = "leaks" ]; then
+if [ "$mode" = "leaks" ]; then
 
     if [ $# -ne 3 ]; then
         erreur "leaks nécessite un identifiant."
@@ -90,7 +90,7 @@ fi
 
 
 
-FIN=$(date +%s%3N)    // pour le temps
+FIN=$(date +%s%3N)   
 DIFF=$((FIN - DEBUT))
 echo "Durée totale : ${DIFF} ms"
 exit 0
