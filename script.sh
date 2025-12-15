@@ -65,7 +65,6 @@ if [ "$mode" = "leaks" ]; then
 
 if [ "$#" -ne 3 ]; then
             erreur "leaks nécessite un identifiant d’usine."
-            
         fi
 
         "$EXEC" leaks "$option" "$chemin"
