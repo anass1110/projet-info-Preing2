@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEBUT=$(date +%s%3N) // pour le temps
+DEBUT=$(date +%s%3N)
 
 // truc pour les erreur et afficher le temps meme avec les erreurs
 erreur() {
@@ -31,7 +31,6 @@ if [ ! -x "$EXEC" ]; then
     gcc -Wall -Wextra -o water_analysis water_analysis.c
     if [ $? -ne 0 ]; then
         erreur " compilation du programme C échouée."
-        exit 1
     fi
 fi
 
@@ -52,7 +51,7 @@ if [ "$mode" = "histo" ]; then
     fi
  if [[ "$option" != "max" && "$option" != "src" && "$option" != "real" ]]; then
             erreur " option histo invalide."
-            exit 1
+            
         fi
 "$EXEC" histo "$option" "$chemin"
 fi
@@ -62,7 +61,7 @@ if [ "$mode" = "leaks" ]; then
 
 if [ "$#" -ne 3 ]; then
             erreur "leaks nécessite un identifiant d’usine."
-            exit 1
+            
         fi
 
         "$EXEC" leaks "$option" "$chemin"
