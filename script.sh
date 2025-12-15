@@ -54,6 +54,10 @@ if [ "$mode" = "histo" ]; then
             
         fi
 "$EXEC" histo "$option" "$chemin"
+RET=$?
+if [ $RET -ne 0 ]; then
+    erreur "Le programme C a échoué "
+fi
 fi
 
 
@@ -65,6 +69,10 @@ if [ "$#" -ne 3 ]; then
         fi
 
         "$EXEC" leaks "$option" "$chemin"
+        RET=$?
+  if [ $RET -ne 0 ]; then
+    erreur "Le programme C a échoué "
+  fi
         fi
 
 
