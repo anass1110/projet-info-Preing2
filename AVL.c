@@ -78,20 +78,6 @@ NoeudAVL* rotationDroite(NoeudAVL* a) {
 
 
 
-
-
-
-
-
-
-
-
-
-static int max(int a, int b)
-{
-    return (a > b) ? a : b;
-}
-
 static NoeudAVL *nouveau_noeud(const char *id)
 {
     NoeudAVL *n = (NoeudAVL *)malloc(sizeof(NoeudAVL));
@@ -111,32 +97,6 @@ static NoeudAVL *nouveau_noeud(const char *id)
     return n;
 }
 
-static NoeudAVL *rotation_droite(NoeudAVL *y)
-{
-    NoeudAVL *x = y->gauche;
-    NoeudAVL *T2 = x->droit;
-
-    x->droit = y;
-    y->gauche = T2;
-    y->hauteur = max(hauteur(y->gauche), hauteur(y->droit)) + 1;
-    x->hauteur = max(hauteur(x->gauche), hauteur(x->droit)) + 1;
-
-    return x;
-}
-
-static NoeudAVL *rotation_gauche(NoeudAVL *x)
-{
-    NoeudAVL *y = x->droit;
-    NoeudAVL *T2 = y->gauche;
-
-    y->gauche = x;
-    x->droit = T2;
-
-    x->hauteur = max(hauteur(x->gauche), hauteur(x->droit)) + 1;
-    y->hauteur = max(hauteur(y->gauche), hauteur(y->droit)) + 1;
-
-    return y;
-}
 
 static int facteur_equilibre(NoeudAVL *n)
 {
