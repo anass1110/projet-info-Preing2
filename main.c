@@ -5,7 +5,7 @@
 #include "pertes.h"
 #include "Utilitaire.h"
 
-static void afficher_usage(void)
+void afficher_usage(void)
 {
     printf("Usage :\n");
     printf("  ./wildwater histo <csv> <max|src|real|all> <fichier_sortie>\n");
