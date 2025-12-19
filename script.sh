@@ -84,6 +84,9 @@ fi
       set ylabel 'Volume (M.m3.year-1)';
       set style data histograms;
       set style histogram rowstacked;
+      set style fill solid 1.0 border -1;
+      set xtics rotate by -90 font \",8\";
+      set boxwidth 0.75 relative;
 
       set output '${PNG_LOW}';
       set title '50 plus petites usines';
@@ -108,6 +111,9 @@ fi
     set datafile separator ';';
     set xlabel 'Usine';
     set ylabel 'Volume (k.m3.year-1)';
+    set style fill solid 1.0 border -1;
+    set xtics rotate by -90 font \",8\";
+    set boxwidth 0.75 relative;
 
     set output '${PNG_LOW}';
     set title '50 plus petites usines';
@@ -140,7 +146,6 @@ fi
 usage
 afficher_fin
 exit 1
-
 
 
 
