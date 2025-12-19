@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-static void nettoyer_fin_ligne(char *chaine)
+void nettoyer_fin_ligne(char *chaine)
 {
     size_t n;
     if (chaine == NULL) return;
@@ -13,7 +13,7 @@ static void nettoyer_fin_ligne(char *chaine)
     }
 }
 
-static void copier_champ(char *destination, const char *source)
+void copier_champ(char *destination, const char *source)
 {
     if (destination == NULL) return;
     if (source == NULL) {
