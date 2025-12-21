@@ -4,6 +4,7 @@
 
 NoeudReseau* creer_noeud(const char *identifiant)
 {
+    if (identifiant == NULL) return NULL;
     NoeudReseau *n;
 
     n = (NoeudReseau*)malloc(sizeof(NoeudReseau));
