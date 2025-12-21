@@ -12,6 +12,7 @@ int max(int a, int b) {
 
 /* Création d'un noeud initialisé */
 NoeudAVL *nouveau_noeud(const char *id) {
+    if (id == NULL) return NULL;
     NoeudAVL *n = (NoeudAVL *)malloc(sizeof(NoeudAVL));
     if (n == NULL) return NULL;
 
@@ -69,6 +70,7 @@ NoeudAVL *equilibrer(NoeudAVL *n) {
 
 /* Fonction de Recherche */
 NoeudAVL *avl_rechercher(NoeudAVL *racine, const char *identifiant) {
+    if (identifiant == NULL) return NULL;
     if (racine == NULL) return NULL;
     int cmp = strcmp(identifiant, racine->identifiant);
     if (cmp == 0) return racine;
@@ -81,7 +83,11 @@ NoeudAVL *avl_rechercher(NoeudAVL *racine, const char *identifiant) {
 NoeudAVL *avl_inserer_ou_trouver(NoeudAVL *racine, const char *identifiant, NoeudAVL **noeud_trouve) {
     if (racine == NULL) {
         *noeud_trouve = nouveau_noeud(identifiant);
-        return *noeud_trouve;
+        if (*noeud_trouve == NULL) {
+        return NULL;
+        }
+    return *noeud_trouve;
+
     }
     int cmp = strcmp(identifiant, racine->identifiant);
     if (cmp == 0) {
@@ -101,8 +107,12 @@ NoeudAVL *avl_inserer_ou_trouver(NoeudAVL *racine, const char *identifiant, Noeu
 NoeudAVL *avl_inserer_ptr(NoeudAVL *racine, const char *identifiant, void *ptr, NoeudAVL **noeud_trouve) {
     if (racine == NULL) {
         *noeud_trouve = nouveau_noeud(identifiant);
-        (*noeud_trouve)->ptr = ptr;
-        return *noeud_trouve;
+        if (*noeud_trouve == NULL) {
+        return NULL;
+        }
+    (*noeud_trouve)->ptr = ptr;
+    return *noeud_trouve;
+
     }
     int cmp = strcmp(identifiant, racine->identifiant);
     if (cmp == 0) {
