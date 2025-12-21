@@ -1,1 +1,30 @@
+Rapport de Projet : C-WildWater
+
+Filière : préING2 2025-2026 Équipe :
+ Hugo FERRAND ,Aymeric CASTERET et Anass ABBADI 
+
+1. Introduction et Objectifs
+Le but de ce projet est de réaliser une application de synthèse de données pour un système de distribution d'eau. Le programme doit traiter un fichier CSV massif détaillant le parcours de l'eau, depuis les sources de captation jusqu'aux usagers finaux, en passant par les usines de traitement et les réservoirs de stockage. L'application combine un script Shell pour l'interface et un programme en langage C pour la performance des calculs.  
+
+2. Répartition des Tâches 
+Anass ABBADI : Développement de la structure AVL et des algorithmes de tri pour les usines.  	
+
+Hugo FERRAND : Création du Script Shell, gestion du Makefile et génération des graphiques via GnuPlot.
+
+Aymeric CASTERET : Gestion du réseau de distribution (fonction leaks).  
+3. Planning de Réalisation
+
+Étape 1 : Compréhension  Nous avons lu le sujet pour bien comprendre comment l'eau circule entre les sources, les usines et les maisons.
+Étape 2 : Création de la base en C  Nous avons écrit le code pour que l'ordinateur puisse lire le gros fichier de données et classer les usines dans l'ordre.
+Étape 3 : Programmation du script et des graphiques Nous avons fait en sorte que le script Shell puisse recevoir vos commandes et transformer les chiffres en jolis dessins avec un outil appelé GnuPlot.
+Étape 4 : Calculs des fuites et Tests Nous avons ajouté la fonction pour calculer les fuites. Nous avons testé le programme plusieurs fois pour vérifier qu'il ne plante pas et qu'il donne les bons résultats.
+Étape 5 : Finition Nous avons nettoyé le code et écrit ce rapport pour expliquer notre travail.
+
+4. Difficultés rencontrées
+La compilation (Makefile) : Réussir à lier tous les fichiers de code pour qu'ils se compilent ensemble sans erreur a été un défi technique au début.
+Les Histogrammes : Trier et sélectionner les bonnes usines pour les afficher sur les graphiques a demandé beaucoup de précision dans le code.
+Gestion du temps : La période du projet est tombée en même temps que nos examens. Il a été parfois difficile de jongler entre les révisions et le développement du programme, mais nous avons réussi à nous organiser en équipe.
+Le volume de données : Le fichier à traiter est très lourd. Nous avons dû faire attention à ce que notre programme ne sature pas la mémoire vive de l'ordinateur.
+
+
 
