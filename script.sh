@@ -123,11 +123,7 @@ rm -f "$IDS_LOW" "$IDS_HIGH"
       set style fill solid 1.0 border -1;
       set xtics rotate by -90 font \",8\";
       set boxwidth 0.75 relative;
-      set style line 1 lc rgb '#00AA00';
-      set style line 2 lc rgb '#AA0000';
-      set style line 3 lc rgb '#0000AA';
-
-
+      
 
       set output '${PNG_LOW}';
       set title '50 plus petites usines';
