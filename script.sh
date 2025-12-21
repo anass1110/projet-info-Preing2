@@ -131,9 +131,9 @@ rm -f "$IDS_LOW" "$IDS_HIGH"
 
       set output '${PNG_LOW}';
       set title '50 plus petites usines';
-      plot '${LOW}'  using ($2-$3):xtic(1) ls 1 title 'max-src', \
-          ''        using ($3-$4)         ls 2 title 'src-real', \
-          ''        using ($4)            ls 3 title 'real';
+      plot '${LOW}'  using (\$2-\$3):xtic(1) ls 1 title 'max-src', \
+          ''        using (\$3-\$4)         ls 2 title 'src-real', \
+          ''        using (\$4)            ls 3 title 'real';
 
 
 
@@ -141,9 +141,9 @@ rm -f "$IDS_LOW" "$IDS_HIGH"
 
       set output '${PNG_HIGH}';
       set title '10 plus grandes usines';
-          plot '${HIGH}'  using ($2-$3):xtic(1) ls 1 title 'max-src', \
-          ''        using ($3-$4)         ls 2 title 'src-real', \
-          ''        using ($4)            ls 3 title 'real';
+          plot '${HIGH}'  using (\$2-\$3):xtic(1) ls 1 title 'max-src', \
+          ''        using (\$3-\$4)         ls 2 title 'src-real', \
+          ''        using (\$4)            ls 3 title 'real';
       "
 
       afficher_fin
