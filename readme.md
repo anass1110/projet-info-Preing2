@@ -28,7 +28,7 @@ Nettoyage complet (binaire + fichiers générés `.dat` / `.png`) :
 ```bash
 make distclean
 ```
-
+Si le script ne se lance pas (permission refusée), rendez-le exécutable avec la commande : chmod +x script.sh
 ---
 
 ## 3) Utilisation
