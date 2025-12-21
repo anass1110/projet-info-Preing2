@@ -6,20 +6,12 @@ Projet de traitement d’un fichier CSV volumineux pour :
 
 Le script `script.sh` est le point d’entrée : il compile automatiquement le programme C (via `make` si `./wildwater` n’existe pas), exécute le calcul, génère les fichiers `.dat` et les images `.png` (avec gnuplot), puis affiche la durée totale d’exécution.
 
----
 
 ## 1) Prérequis
 
 ### Outils
 - `gcc` (C11) + `make`
 - `gnuplot` (pour générer les images)
-
-### Installer gnuplot (macOS)
-```bash
-brew install gnuplot
-```
-
----
 
 ## 2) Compilation
 
@@ -55,11 +47,6 @@ Exemples :
 ./script.sh c-wildwater_v0.dat leaks "NM000000T"
 ```
 
-Le script :
-- affiche un message clair en cas d’erreur
-- renvoie un code retour strictement positif si erreur
-- affiche la durée totale en millisecondes
-
 ### B) Exécution directe du programme C
 
 ```bash
@@ -89,14 +76,6 @@ Fichiers générés par le script :
 - `vol_<mode>_high.dat` : 10 plus grandes usines (référence = capacité max)
 - `vol_<mode>_low.png` / `vol_<mode>_high.png` : images
 
-> Pour `src` et `real`, la sélection low/high est faite **selon la capacité max** (conformément au sujet), puis les valeurs affichées correspondent au mode demandé.
-
-### Bonus `all` (empilé)
-- **bleu** : `real`
-- **rouge** : `src - real`
-- **vert** : `max - src`
-
----
 
 ## 5) Leaks
 
@@ -106,9 +85,8 @@ Commande :
 ```
 
 Sortie :
-- `leaks.dat` (mode append : l’historique est conservé ; l’en-tête est écrit si le fichier est vide)
+- `leaks.dat`
 
-Si l’usine est inconnue : le volume de fuite vaut `-1`.
 
 ---
 
@@ -135,7 +113,7 @@ Les fichiers `*_low.dat` et `*_high.dat` sont des sous-ensembles du fichier corr
 
 ## 7) Organisation du code
 
-- `main.c` : parsing des arguments, dispatch des commandes
+- `main.c` : analyse des arguments, dispatch des commandes
 - `lecture_fichier.c/.h` : lecture robuste du CSV (ligne par ligne)
 - `usines_donnes.c/.h` : calculs `histo` (AVL des usines)
 - `pertes.c/.h` : calculs `leaks` (réseau aval + recherche du pire tronçon)
@@ -147,16 +125,9 @@ Les fichiers `*_low.dat` et `*_high.dat` sont des sous-ensembles du fichier corr
 
 ---
 
-## 8) Notes (affichage gnuplot)
 
-Les échelles (`yrange`) et les couleurs peuvent être ajustées dans `script.sh` pour améliorer la lisibilité.
-Ces réglages ne changent pas les valeurs, seulement l’affichage.
-
----
-
-## 9) Auteurs
-
-- (Prénom NOM)
-- (Prénom NOM)
-- Année : 2025–2026
+- Abbadi Anass
+- Ferrand Hugo 
+- Casteret Aymeric
+6
 
