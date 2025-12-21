@@ -16,32 +16,40 @@ int generer_histo(const char *chemin_csv, const char *mode, const char *chemin_s
     if (fichier_csv == NULL) { erreur("impossible d'ouvrir le fichier CSV"); return 2; }
 
     while (lire_ligne_csv(fichier_csv, &ligne)) {
+
+        /* 1) Lecture du max (inchangé) */
         if (champ_est_vide_ou_tiret(ligne.col1) &&
             commence_par(ligne.col2, "Facility complex") &&
             champ_est_vide_ou_tiret(ligne.col3) &&
             !champ_est_vide_ou_tiret(ligne.col4)) {
-
+    
             racine = avl_inserer_ou_trouver(racine, ligne.col2, &noeud_usine);
             if (noeud_usine == NULL) { fclose(fichier_csv); avl_liberer(racine); return 3; }
-
+    
             noeud_usine->v_max = lire_double_ou_0(ligne.col4) / 1000.0;
         }
-
+    
+        /* 2) Lecture de src/real : amont quelconque -> usine */
         if (champ_est_vide_ou_tiret(ligne.col1) &&
-            commence_par(ligne.col2, "Spring") &&
+            !champ_est_vide_ou_tiret(ligne.col2) &&
+            !commence_par(ligne.col2, "Facility complex") &&
             commence_par(ligne.col3, "Facility complex") &&
             !champ_est_vide_ou_tiret(ligne.col4)) {
-
+    
             double volume_source = lire_double_ou_0(ligne.col4) / 1000.0;
             double taux_fuite = lire_double_ou_0(ligne.col5);
-
+    
+            if (taux_fuite < 0.0) taux_fuite = 0.0;
+            if (taux_fuite > 100.0) taux_fuite = 100.0;
+    
             racine = avl_inserer_ou_trouver(racine, ligne.col3, &noeud_usine);
             if (noeud_usine == NULL) { fclose(fichier_csv); avl_liberer(racine); return 3; }
-
-            noeud_usine->v_src += volume_source;
+    
+            noeud_usine->v_src  += volume_source;
             noeud_usine->v_real += volume_source * (1.0 - taux_fuite / 100.0);
         }
     }
+      
     fclose(fichier_csv);
 
     fichier_sortie = fopen(chemin_sortie, "w");
