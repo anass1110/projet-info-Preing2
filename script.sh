@@ -16,7 +16,7 @@ usage() {
 
 
 if [ $# -ne 3 ]; then
-  echo "Erreur : mauvais nombre d'arguments."          //vérification des arguments 
+  echo "Erreur : mauvais nombre d'arguments."     # vérification des arguments 
   usage
   afficher_fin
   exit 1
@@ -32,7 +32,7 @@ if [ ! -f "$CSV" ]; then
   exit 1
 fi
 
-# --- //Compilation via make 
+# Compilation via make 
 if [ ! -x "./wildwater" ]; then
   make
   if [ $? -ne 0 ]; then
@@ -43,7 +43,7 @@ fi
 
 
 
-# --- HISTO ---
+# HISTO 
 if [ "$CMD" = "histo" ]; then
 
   if [ "$ARG" != "max" ] && [ "$ARG" != "src" ] && [ "$ARG" != "real" ] && [ "$ARG" != "all" ]; then
@@ -74,7 +74,7 @@ fi
 
   if command -v gnuplot >/dev/null 2>&1; then
 
-    # ----- BONUS ALL -----
+    # BONUS ALL 
     if [ "$ARG" = "all" ]; then
 
       gnuplot -e "
@@ -105,7 +105,7 @@ fi
       exit 0
     fi
 
-    # ----- MODES NORMAUX -----
+    # MODES NORMAUX 
     gnuplot -e "
     set terminal png;
     set datafile separator ';';
@@ -132,7 +132,7 @@ fi
   exit 0
 fi
 
-# --- LEAKS ---
+#LEAKS 
 if [ "$CMD" = "leaks" ]; then
 ./wildwater leaks "$CSV" "$ARG" leaks.dat
 if [ $? -ne 0 ]; then
